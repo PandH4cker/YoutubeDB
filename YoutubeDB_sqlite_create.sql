@@ -67,7 +67,7 @@ CREATE TABLE videos (
 );
 
 CREATE TABLE infos (
-	info_id 	INT 	NOT NULL 
+	info_id 	INTEGER NOT NULL 
 						PRIMARY KEY 
 						AUTOINCREMENT,
 	category_id INT		NOT NULL
@@ -82,15 +82,15 @@ CREATE TABLE infos (
 	likes INT			NOT NULL
 						CONSTRAINT [likes validity] CHECK (likes + 0 = likes AND
 														   round(likes) = likes AND
-														   (likes >= 0 OR (ratings_disabled = TRUE AND likes = 0)),
+														   (likes >= 0 OR (ratings_disabled = 1 AND likes = 0))),
 	dislikes INT		NOT NULL
 						CONSTRAINT [dislikes validity] CHECK (dislikes + 0 = dislikes AND
 															  round(dislikes) = dislikes AND
-															  (dislikes >= 0 OR (ratings_disabled = TRUE AND dislikes = 0)),
+															  (dislikes >= 0 OR (ratings_disabled = 1 AND dislikes = 0))),
 	comment_count INT	NOT NULL
 						CONSTRAINT [comment count validity] CHECK (comment_count + 0 = comment_count AND
 																   round(comment_count) = comment_count AND
-																   (comment_count >= 0 OR (comments_disabled = TRUE AND comment_count = 0)),
+																   (comment_count >= 0 OR (comments_disabled = 1 AND comment_count = 0))),
 	thumbnail_link VARCHAR (255) CONSTRAINT [thumbnail link length] CHECK (length(thumbnail_link) <= 255),
 	comments_disabled BOOLEAN,
 	ratings_disabled BOOLEAN,
@@ -112,10 +112,11 @@ CREATE TABLE infos (
 );
 
 CREATE TABLE categories (
-	category_id INT 			NOT NULL
+	category_id INTEGER 		NOT NULL
 								PRIMARY KEY 
 								AUTOINCREMENT,
 	category_name VARCHAR (20)	NOT NULL
 								CONSTRAINT [category name length] CHECK (length(category_name) <= 20) 
 );
-
+--
+PRAGMA foreign_keys = ON;
