@@ -115,8 +115,8 @@ CREATE TABLE categories (
 	category_id INTEGER 		NOT NULL
 								PRIMARY KEY 
 								AUTOINCREMENT,
-	category_name VARCHAR (20)	NOT NULL
-								CONSTRAINT [category name length] CHECK (length(category_name) <= 20) 
+	category_name VARCHAR (50)	NOT NULL
+								CONSTRAINT [category name length] CHECK (length(category_name) <= 50) 
 );
 --
 PRAGMA foreign_keys = ON;
